@@ -1,0 +1,57 @@
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "❗ Cannot divide by zero."
+    return a / b
+
+def save_result(operation, a, b, result):
+    with open("calculator/calculator_log.txt", "a") as file:
+        file.write(f"{a} {operation} {b} = {result}\n")
+
+def calculator():
+    print("🧮 Simple Python Calculator")
+    print("Select an operation:")
+    print("1. Addition (+)")
+    print("2. Subtraction (-)")
+    print("3. Multiplication (*)")
+    print("4. Division (/)")
+
+    try:
+        choice = input("Enter your choice (1-4): ")
+
+        if choice not in ['1', '2', '3', '4']:
+            print("❌ Invalid choice. Please choose a number between 1 and 4.")
+            return
+
+        a = float(input("Enter the first number: "))
+        b = float(input("Enter the second number: "))
+
+        if choice == '1':
+            result = add(a, b)
+            op = '+'
+        elif choice == '2':
+            result = subtract(a, b)
+            op = '-'
+        elif choice == '3':
+            result = multiply(a, b)
+            op = '*'
+        elif choice == '4':
+            result = divide(a, b)
+            op = '/'
+
+        print(f"✅ Result: {a} {op} {b} = {result}")
+        save_result(op, a, b, result)
+
+    except ValueError:
+        print("⚠️ Please enter valid numbers.")
+
+# Run the calculator
+calculator()
